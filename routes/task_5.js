@@ -4,7 +4,6 @@ const Employee = require("../db");
 app.put("/", async (req, res) => {
   try {
     const id=req.query.id;
-    console.log(id)
     const employee = await Employee.findById(id);
     employee.block = !employee.block;
     await employee.save();
