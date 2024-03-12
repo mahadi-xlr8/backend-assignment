@@ -23,7 +23,7 @@ const Employee = mongoose.model(
     phone:{
         type:String,
         minlength:11,
-        maxlength:11,
+        maxlength:14,
         required:true
     },
     block:{
