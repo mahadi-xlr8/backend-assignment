@@ -1,3 +1,5 @@
+const isNameValid=require("../helper/nameValidation")
+const isPhoneValid=require("../helper/phoneValidation")
 module.exports = (req, res, next) => {
   const { firstName, lastName, email, phone } = req.body;
 
@@ -8,9 +10,8 @@ module.exports = (req, res, next) => {
   if (fullName == undefined || email == undefined || phone == undefined)
     return res.status(400).send("All informations not privided!");
 
-  // checking if it is a valid name
-  // name should have a minimum of 2 characters and a maximum of 100 characters.
-  if (fullName.length <= 1 || fullName.length > 100) {
+  
+  if (!isNameValid(fullName)) {
     return res.status(400).send("Invalid first name!");
   }
 
@@ -19,9 +20,8 @@ module.exports = (req, res, next) => {
     return res.status(400).send("Invalid email address!");
   }
 
-  // checking if it is a valid phone number accourding to our country
 
-  if (!phone.match(/^(\+88)?01([0-9]{9})$/g)) {
+  if (!isPhoneValid) {
     return res.status(400).send("Invalid phone number!");
   }
   req.body.fullName = fullName;
