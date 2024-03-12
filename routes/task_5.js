@@ -1,13 +1,18 @@
 const app = require("express").Router();
 const Employee = require("../db");
+const tokenChecker = require("../middleware/tokenChecker");
 
-app.put("/", async (req, res) => {
+app.put("/", tokenChecker, async (req, res) => {
   try {
-    const id=req.query.id;
+    const id = req.query.id;
     const employee = await Employee.findById(id);
-    employee.block = !employee.block;
-    await employee.save();
-    res.status(200).send("Block status changed successfully!");
+    let message = "Block status changed successfully!",
+      status = 200;
+    if (employee != null) {
+      employee.block = !employee.block;
+      await employee.save();
+    } else (message = "user id does not exist!"), (status = 400);
+    res.status(status).send(message);
   } catch (err) {
     console.log(err.message);
     res.status(400).send("Something went wrong");

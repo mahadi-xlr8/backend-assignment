@@ -19,8 +19,9 @@ app.put("/", tokenChecker, updateInfoValidation, async (req, res) => {
       return res.status(200).send("Nothing to update!");
     }
 
-    await Employee.findByIdAndUpdate(id, data);
-    res.status(200).send("Info updated successfully!");
+    const temp = await Employee.findByIdAndUpdate(id, data, { new: true });
+    if (temp != null) res.status(200).send("Info updated successfully!");
+    else res.status(400).send("User id does not exist!");
   } catch (err) {
     console.log(err.message);
     res.status(400).send("Something went wrong!");
