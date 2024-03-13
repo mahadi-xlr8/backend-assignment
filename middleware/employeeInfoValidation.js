@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
   }
 
 
-  if (!isPhoneValid) {
+  if (!isPhoneValid(phone)) {
     return res.status(400).send("Invalid phone number!");
   }
   req.body.fullName = fullName;

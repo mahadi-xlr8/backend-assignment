@@ -9,10 +9,10 @@ const deleteEmployee=require("./routes/task_6")
 
 app.use(express.json());
 
-app.use("/employee-info", addEmployee);
-app.use("/employee-list", getEmployee);
-app.use("/employee-by-id", getEmployeeById);
-app.use("/employee-update", updateInfo);
+app.use("/add-employee", addEmployee);
+app.use("/get-employee", getEmployee);
+app.use("/get-employee-details", getEmployeeById);
+app.use("/employee-info-update", updateInfo);
 app.use("/block-status-change",blockStatus)
 app.use("/delete",deleteEmployee)
 

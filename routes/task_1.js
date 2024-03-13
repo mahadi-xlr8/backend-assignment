@@ -14,7 +14,7 @@ app.post("/", tokenChecker, dataValidation, async (req, res) => {
     res.status(201).send("Employee info added successfully!");
   } catch (err) {
     console.log(err.message);
-    res.status(400).send("Email already exist!");
+    res.status(400).send("Something went wrong!");
   }
 });
 
